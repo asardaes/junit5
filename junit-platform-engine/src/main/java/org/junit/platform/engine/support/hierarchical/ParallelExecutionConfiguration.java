@@ -34,6 +34,13 @@ import org.apiguardian.api.API;
 @API(status = STABLE, since = "1.10")
 public interface ParallelExecutionConfiguration {
 
+	enum TestExecutor {
+
+		FORK_JOIN,
+
+		FIXED_THREAD
+	}
+
 	/**
 	 * Get the parallelism to be used.
 	 *
@@ -72,6 +79,10 @@ public interface ParallelExecutionConfiguration {
 	@API(status = EXPERIMENTAL, since = "1.9")
 	default Predicate<? super ForkJoinPool> getSaturatePredicate() {
 		return null;
+	}
+
+	default TestExecutor getTestExecutor() {
+		return TestExecutor.FORK_JOIN;
 	}
 
 }
